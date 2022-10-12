@@ -23,7 +23,7 @@ public class Main {
                     studentManagermentController.addStudent();
                     break;
                 case 2:
-                    studentManagermentController.findOrSortStudent();
+                    studentManagermentController.findAndSortStudent();
                     break;
                 case 3:
                     studentManagermentController.updateOrDeleteStudent();

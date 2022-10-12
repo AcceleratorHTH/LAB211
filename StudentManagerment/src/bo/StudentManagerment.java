@@ -47,17 +47,6 @@ public class StudentManagerment {
         tail = q;
     }
 
-    public Node searchByName(String xName) {
-        Node p = head;
-        while (p != null) {
-            if (p.getInfo().getName().equals(xName)) {
-                return (p);
-            }
-            p = p.getNext();
-        }
-        return (null);
-    }
-
     public Node searchById(String xId) {
         Node p = head;
         while (p != null) {
@@ -204,15 +193,14 @@ public class StudentManagerment {
         } else {
             return true;
         }
-        
+
     }
 
 }
 
 /**
- * ID giống - Name ko giống -> ko add
- *          - Name giống - Semeter giống - CourseName giống => ko add
- *                                       - CourseName ko giống => add            
- *                       - Semeter ko giống - CourseName ko cần check => add
- * ID không giống - Name tùy ý - Semeter tùy ý - CourseName tùy ý
+ * ID giống - Name ko giống -> ko add - Name giống - Semeter giống - CourseName
+ * giống => ko add - CourseName ko giống => add - Semeter ko giống - CourseName
+ * ko cần check => add ID không giống - Name tùy ý - Semeter tùy ý - CourseName
+ * tùy ý
  */

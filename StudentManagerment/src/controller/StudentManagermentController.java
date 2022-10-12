@@ -51,43 +51,26 @@ public class StudentManagermentController {
                     studentManagerment.addLast(x);
                     System.out.println("Added!\n");
                 } else {
-                    System.out.println("Cannot add! Check the list later to see if some elements have been exist.");
+                    System.out.println("Cannot add! Check the list later to see if some elements have been exist.\n");
                 }
             }
         } while (choice);
 
     }
 
-    private void findStudent() {
+    public void findAndSortStudent() {
         String name = ValidationAndNormalizingTextUtils.getStringByRegex("Enter Name: ", "Please enter character only!", "^[a-zA-Z ]*$");
-        StudentManagerment temp = studentManagerment;
-        while (true) {
-            Node s = temp.searchByName(name);
-            if (s == null) {
-                break;
-            } else {
-                temp.visit(s);
-                temp.delete(s);
+        Node p = studentManagerment.getHead();
+        StudentManagerment temp = new StudentManagerment();
+        while (p != null) {
+            if (p.getInfo().getName().equals(name)) {
+                temp.addLast(p.getInfo());
             }
+            p = p.getNext();
         }
-    }
+        temp.sortByName();
+        temp.display();
 
-    private void sortStudent() {
-        studentManagerment.sortByName();
-        studentManagerment.display();
-    }
-
-    public void findOrSortStudent() {
-        String choice = ValidationAndNormalizingTextUtils.getStringByRegex("Do you want to find (F) or sort (S) student?: ", "Please enter F or S", "\\bF\\b|\\bS\\b");
-        switch (choice) {
-            case "F":
-                findStudent();
-                break;
-            case "S":
-                sortStudent();
-                break;
-
-        }
     }
 
     public void updateOrDeleteStudent() {
@@ -101,7 +84,14 @@ public class StudentManagermentController {
             String choice = ValidationAndNormalizingTextUtils.getStringByRegex("Do you want to update (U) or delete (D) student?: ", "Please enter U or D", "\\bU\\b|\\bD\\b");
             switch (choice) {
                 case ("U"):
-                    studentInputer.setInformation(s.getInfo());
+                    Student x = new Student();
+
+                    studentInputer.setInformation(x);
+                    while (!studentManagerment.check(x.getId(), x.getName(), x.getSemeter(), x.getCourseName())) {
+                        System.out.println("Cannot update! Check the list later to see if some elements have been exist.");
+                        studentInputer.setInformation(x);
+                    }
+                    s.setInfo(x);
                     System.out.println("Updated!");
                     break;
                 case ("D"):
