@@ -31,7 +31,8 @@ public class StudentInputer {
         x.setCourseName(ValidationAndNormalizingTextUtils.getStringByRegex("Enter CourseName: ", "There are only three courses: Java, .Net, C/C++", "(?<=^|\\s).Net(?=\\s|$)|(?<=^|\\s)Java(?=\\s|$)|(?<=^|\\s)C\\/C\\+\\+(?=\\s|$)"));
     }
     
-    public void inputInformation(Student s) {
+    public void setInformation(Student s) {
+        s.setId(ValidationAndNormalizingTextUtils.getNonEmptyString("Enter Id: "));
         s.setName(ValidationAndNormalizingTextUtils.getStringByRegex("Enter Name: ", "Please enter character only!", "^[a-zA-Z ]*$"));
         s.setSemeter(ValidationAndNormalizingTextUtils.getStringByRegex("Enter Semeter: ", "Please do not use special character", "^[a-zA-Z0-9 ]*$"));
         s.setCourseName(ValidationAndNormalizingTextUtils.getStringByRegex("Enter CourseName: ", "There are only three courses: Java, .Net, C/C++", "(?<=^|\\s).Net(?=\\s|$)|(?<=^|\\s)Java(?=\\s|$)|(?<=^|\\s)C\\/C\\+\\+(?=\\s|$)"));

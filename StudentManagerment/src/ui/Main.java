@@ -29,7 +29,6 @@ public class Main {
                     studentManagermentController.updateOrDeleteStudent();
                     break;
                 case 4:
-                    studentManagermentController.displayWithTotalCourse();
                     break;
                 case 5:
                     System.out.println("Bye Bye!");

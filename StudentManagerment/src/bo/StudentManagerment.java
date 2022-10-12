@@ -16,7 +16,7 @@ public class StudentManagerment {
 
     private Node head;
     private Node tail;
-    
+
     public StudentManagerment() {
         head = tail = null;
     }
@@ -140,51 +140,79 @@ public class StudentManagerment {
         }
         System.out.println();
     }
-    
-    
+
 //Check Duplicate    
-    public Boolean checkDuplicateId(String xId){
+    private Boolean checkDuplicateId(String xId) {
         Node p = head;
-        while(p != null){
-            if(p.getInfo().getId().equals(xId) ){
+        while (p != null) {
+            if (p.getInfo().getId().equals(xId)) {
                 return false;
             }
             p = p.getNext();
         }
         return true;
-    } 
-    
-    public Boolean checkDuplicateName(String xName){
+    }
+
+    private Boolean checkDuplicateName(String xName) {
         Node p = head;
-        while(p != null){
-            if(p.getInfo().getName().equals(xName) ){
+        while (p != null) {
+            if (p.getInfo().getName().equals(xName)) {
                 return false;
             }
             p = p.getNext();
         }
         return true;
-    } 
-    
-    public Boolean checkDuplicateCourseName(String xCourseName){
+    }
+
+    private Boolean checkDuplicateCourseName(String xCourseName) {
         Node p = head;
-        while(p != null){
-            if(p.getInfo().getCourseName().equals(xCourseName) ){
+        while (p != null) {
+            if (p.getInfo().getCourseName().equals(xCourseName)) {
                 return false;
             }
             p = p.getNext();
         }
         return true;
-    } 
-    
-    public Boolean checkDuplicateSemeter(String xSemeter){
+    }
+
+    private Boolean checkDuplicateSemeter(String xSemeter) {
         Node p = head;
-        while(p != null){
-            if(p.getInfo().getSemeter().equals(xSemeter) ){
+        while (p != null) {
+            if (p.getInfo().getSemeter().equals(xSemeter)) {
                 return false;
             }
             p = p.getNext();
         }
         return true;
-    } 
+    }
+
+    public Boolean check(String xId, String xName, String xSemeter, String xCourseName) { //true = ko dup, false = dup
+        if (checkDuplicateId(xId) == false) {
+            if (checkDuplicateName(xName) == true) {
+                return false;
+            } else {
+                if (checkDuplicateSemeter(xSemeter) == false) {
+                    if (checkDuplicateCourseName(xCourseName) == false) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                } else {
+                    return true;
+                }
+            }
+        } else {
+            return true;
+        }
+        
+    }
 
 }
+
+/**
+ * ID giống - Name ko giống -> ko add
+ *          - Name giống - Semeter giống - CourseName giống => ko add
+ *                                       - CourseName ko giống => add            
+ *                       - Semeter ko giống - CourseName ko cần check => add
+ * ID không giống - Name tùy ý - Semeter tùy ý - CourseName tùy ý
+ */

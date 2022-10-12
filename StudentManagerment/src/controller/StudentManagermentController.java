@@ -27,15 +27,17 @@ public class StudentManagermentController {
     }
 
     public void addStudent() {
-        for (int i = 0; i < 2; i++) {
+        int n = ValidationAndNormalizingTextUtils.getInt("How many students you want to add? (By number): ", "Please enter integer!", "Number is too big", 0, Integer.MAX_VALUE);
+        System.out.println("");
+        for (int i = 0; i < n; i++) {
             studentInputer = new StudentInputer();
             studentInputer.inputInformation();
             Student x = studentInputer.getStudent();
-            if (studentManagerment.checkDuplicateId(x.getId())) {
+            if (studentManagerment.check(x.getId(), x.getName(), x.getSemeter(), x.getCourseName())) {
                 studentManagerment.addLast(x);
                 System.out.println("Added!\n");
             } else {
-                System.out.println("Id already existed!\n");
+                System.out.println("Cannot add! Check the list later to see if some elements have been exist.\n");
             }
         }
         boolean choice;
@@ -45,11 +47,11 @@ public class StudentManagermentController {
                 studentInputer = new StudentInputer();
                 studentInputer.inputInformation();
                 Student x = studentInputer.getStudent();
-                if (studentManagerment.checkDuplicateId(x.getId())) {
+                if (studentManagerment.check(x.getId(), x.getName(), x.getSemeter(), x.getCourseName())) {
                     studentManagerment.addLast(x);
                     System.out.println("Added!\n");
                 } else {
-                    System.out.println("Id already existed!\n");
+                    System.out.println("Cannot add! Check the list later to see if some elements have been exist.");
                 }
             }
         } while (choice);
@@ -99,7 +101,7 @@ public class StudentManagermentController {
             String choice = ValidationAndNormalizingTextUtils.getStringByRegex("Do you want to update (U) or delete (D) student?: ", "Please enter U or D", "\\bU\\b|\\bD\\b");
             switch (choice) {
                 case ("U"):
-                    studentInputer.inputInformation(s.getInfo());
+                    studentInputer.setInformation(s.getInfo());
                     System.out.println("Updated!");
                     break;
                 case ("D"):
@@ -108,10 +110,6 @@ public class StudentManagermentController {
                     break;
             }
         }
-    }
-
-    public void displayWithTotalCourse() {
-
     }
 
 }
