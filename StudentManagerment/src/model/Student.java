@@ -81,7 +81,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return id + " | " + name + " | " + semeter + " | " + courseName;
+        return String.format("%-8s | %-20s | %-11s | %-7s", id, name, semeter, courseName);
     }
 
 }

@@ -9,6 +9,7 @@ import bo.StudentInputer;
 import bo.StudentManagerment;
 import java.util.ArrayList;
 import model.Node;
+import model.Report;
 import model.Student;
 import utils.*;
 
@@ -59,6 +60,10 @@ public class StudentManagermentController {
     }
 
     public void findAndSortStudent() {
+        if (studentManagerment.isEmpty()) {
+            System.err.println("List empty!");
+            return;
+        }
         String name = ValidationAndNormalizingTextUtils.getStringByRegex("Enter Name: ", "Please enter character only!", "^[a-zA-Z ]*$");
         Node p = studentManagerment.getHead();
         StudentManagerment temp = new StudentManagerment();
@@ -68,14 +73,23 @@ public class StudentManagermentController {
             }
             p = p.getNext();
         }
-        temp.sortByName();
-        temp.display();
-
+        if (temp.isEmpty()) {
+            System.out.println("Not found any!");
+        } else {
+            temp.sortByName();
+            temp.display();
+        }
     }
 
     public void updateOrDeleteStudent() {
+        if (studentManagerment.isEmpty()) {
+            System.err.println("List empty!");
+            return;
+        }
         String id = ValidationAndNormalizingTextUtils.getNonEmptyString("Enter ID: ");
-        Node s = studentManagerment.searchById(id);
+        String semeter = ValidationAndNormalizingTextUtils.getStringByRegex("Enter Semeter: ", "Please do not use special character", "^[a-zA-Z0-9 ]*$");
+        String courseName = ValidationAndNormalizingTextUtils.getStringByRegex("Enter CourseName: ", "There are only three courses: Java, .Net, C/C++", "(?<=^|\\s).Net(?=\\s|$)|(?<=^|\\s)Java(?=\\s|$)|(?<=^|\\s)C\\/C\\+\\+(?=\\s|$)");
+        Node s = studentManagerment.search(id, semeter, courseName);
         if (s == null) {
             System.out.println("Student not found!");
         } else {
@@ -85,7 +99,6 @@ public class StudentManagermentController {
             switch (choice) {
                 case ("U"):
                     Student x = new Student();
-
                     studentInputer.setInformation(x);
                     while (!studentManagerment.check(x.getId(), x.getName(), x.getSemeter(), x.getCourseName())) {
                         System.out.println("Cannot update! Check the list later to see if some elements have been exist.");
@@ -102,4 +115,42 @@ public class StudentManagermentController {
         }
     }
 
+    public void addFast() {
+
+        studentManagerment.addLast(new Student("HE171493", "Pham Quoc Trung", "Summer 2022", "Java"));
+        studentManagerment.addLast(new Student("HE171234", "Pham Thi Minh Thuy", "Fall 2022", "Java"));
+        studentManagerment.addLast(new Student("HE175678", "Bui Tien Anh", "Spring 2022", "Java"));
+        studentManagerment.addLast(new Student("HE170910", "Tran Trong Duc", "Spring 2022", ".Net"));
+        studentManagerment.addLast(new Student("HE171493", "Pham Quoc Trung", "Fall 2022", "Java"));
+        studentManagerment.addLast(new Student("HE171493", "Pham Quoc Trung", "Fall 2022", "C/C++"));
+
+        studentManagerment.display();
+
+    }
+
+    public void report() {
+        if (studentManagerment.isEmpty()) {
+            System.err.println("List empty!");
+            return;
+        }
+        ArrayList<Report> listReport = new ArrayList<>();
+        for (Node p = studentManagerment.getHead(); p != null; p = p.getNext()) {
+            int total = 0;
+            for (Node q = studentManagerment.getHead(); q != null; q = q.getNext()) {
+                if (p.getInfo().getId().equals(q.getInfo().getId())
+                        && p.getInfo().getCourseName().equals(q.getInfo().getCourseName())) {
+                    total++;
+                }
+            }
+            if (ValidationAndNormalizingTextUtils.checkReportExist(listReport, p.getInfo().getName(), p.getInfo().getCourseName(), total)) {
+                Report rp = new Report(p.getInfo(), total);
+                listReport.add(rp);
+            }
+            total = 0;
+        }
+
+        for (int i = 0; i < listReport.size(); i++) {
+            System.out.printf("%-20s|%-10s|%-5d\n", listReport.get(i).getStudent().getName(), listReport.get(i).getStudent().getCourseName(), listReport.get(i).getTotalCourse());
+        }
+    }
 }

@@ -47,10 +47,10 @@ public class StudentManagerment {
         tail = q;
     }
 
-    public Node searchById(String xId) {
+    public Node search(String xId, String xSemeter, String xCourseName) {
         Node p = head;
         while (p != null) {
-            if (p.getInfo().getId().equals(xId)) {
+            if (p.getInfo().getId().equals(xId) && p.getInfo().getSemeter().equals(xSemeter) && p.getInfo().getCourseName().equals(xCourseName)) {
                 return (p);
             }
             p = p.getNext();

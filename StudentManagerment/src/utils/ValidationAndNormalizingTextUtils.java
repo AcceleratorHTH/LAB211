@@ -8,11 +8,13 @@ package utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import model.Report;
 
 /**
  *
@@ -123,13 +125,13 @@ public class ValidationAndNormalizingTextUtils {
             }
         }
     }
-    
-    public static Date GetDate(String mess){
+
+    public static Date GetDate(String mess) {
         Date date = new Date();
         SimpleDateFormat fm = new SimpleDateFormat("dd/MM/yyyy");
         fm.setLenient(false);
         Scanner sc = new Scanner(System.in);
-        do{
+        do {
             System.out.println(mess);
             String sDate = sc.nextLine();
             try {
@@ -138,11 +140,26 @@ public class ValidationAndNormalizingTextUtils {
             } catch (ParseException ex) {
                 System.out.print(ex);
             }
-        }while(true);
-        
+        } while (true);
+
     }
-    public static String DayOfWeek(Date d){
-        SimpleDateFormat SDF =  new SimpleDateFormat("EEEE");
+
+    public static String DayOfWeek(Date d) {
+        SimpleDateFormat SDF = new SimpleDateFormat("EEEE");
         return SDF.format(d);
+    }
+
+    public static boolean checkReportExist(ArrayList<Report> listReport, String name, String course, int total) {
+        // traverse list lr
+        for (Report report : listReport) {
+            // Condition use to check name equals name of student at list report when traverse with report
+            // is equals parameter, total and course are same for name
+            if (name.equals(report.getStudent().getName())
+                    && total == report.getTotalCourse()
+                    && course.equals(report.getStudent().getCourseName())) {
+                return false;
+            }
+        }
+        return true;
     }
 }

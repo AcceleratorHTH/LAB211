@@ -20,7 +20,8 @@ public class Main {
             choice = ValidationAndNormalizingTextUtils.getInt("Your choice: ", "Please input an integer number!", "Please input an integer number in range [1,5]", 1, 5);
             switch (choice) {
                 case 1:
-                    studentManagermentController.addStudent();
+//                    studentManagermentController.addStudent();
+                    studentManagermentController.addFast();
                     break;
                 case 2:
                     studentManagermentController.findAndSortStudent();
@@ -29,6 +30,7 @@ public class Main {
                     studentManagermentController.updateOrDeleteStudent();
                     break;
                 case 4:
+                    studentManagermentController.report();
                     break;
                 case 5:
                     System.out.println("Bye Bye!");
