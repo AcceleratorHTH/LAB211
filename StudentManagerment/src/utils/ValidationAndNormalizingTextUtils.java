@@ -150,10 +150,7 @@ public class ValidationAndNormalizingTextUtils {
     }
 
     public static boolean checkReportExist(ArrayList<Report> listReport, String name, String course, int total) {
-        // traverse list lr
         for (Report report : listReport) {
-            // Condition use to check name equals name of student at list report when traverse with report
-            // is equals parameter, total and course are same for name
             if (name.equals(report.getStudent().getName())
                     && total == report.getTotalCourse()
                     && course.equals(report.getStudent().getCourseName())) {
