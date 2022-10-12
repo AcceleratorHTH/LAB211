@@ -3,8 +3,8 @@ package bo;
 import model.BaseType;
 import utils.ValidationAndNormalizingTextUtils;
 
-public class NumberInputer {
-    public NumberInputer() {
+public class ValueInput {
+    public ValueInput() {
     }
 
     public String inputNumberByChoice(BaseType type) {

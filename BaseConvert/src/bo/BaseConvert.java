@@ -3,11 +3,11 @@ package bo;
 import model.BaseType;
 import utils.ValidationAndNormalizingTextUtils;
 
-public class BaseConverter {
+public class BaseConvert {
 
     private static String BIT_STRING = "0123456789ABCDEF";
 
-    public BaseConverter() {
+    public BaseConvert() {
     }
 
     private String decToBase(String input, BaseType type) {
