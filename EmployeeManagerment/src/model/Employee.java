@@ -11,7 +11,7 @@ package model;
  */
 public class Employee {
 
-    private int id;
+    private String id;
     private String firstName;
     private String lastName;
     private String phone;
@@ -25,7 +25,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int id, String firstName, String lastName, String phone, String email, String address, String dateOfBirth, String sex, int salary, String agency) {
+    public Employee(String id, String firstName, String lastName, String phone, String email, String address, String dateOfBirth, String sex, int salary, String agency) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -38,7 +38,7 @@ public class Employee {
         this.agency = agency;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -78,7 +78,7 @@ public class Employee {
         return agency;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -120,7 +120,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", email=" + email + ", address=" + address + ", dateOfBirth=" + dateOfBirth + ", sex=" + sex + ", salary=" + salary + ", agency=" + agency + '}';
+        return String.format("%-8s | %-8s | %-8s | %-11s | %-30s | %-11s | %-11s | %-7s | %-10d | %-7s ", id, firstName, lastName, phone, email, address, dateOfBirth, sex, salary, agency);
     }
 
 }

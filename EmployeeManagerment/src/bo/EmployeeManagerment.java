@@ -15,11 +15,9 @@ public class EmployeeManagerment {
 
     private Node head;
     private Node tail;
-    private int lastId;
 
     public EmployeeManagerment() {
         head = tail = null;
-        lastId = 0;
     }
 
     public Node getHead() {
@@ -39,7 +37,6 @@ public class EmployeeManagerment {
     }
 
     public void addLast(Employee x) {
-        x.setId(++lastId);
         Node q = new Node(x);
         if (isEmpty()) {
             head = tail = q;
@@ -49,21 +46,21 @@ public class EmployeeManagerment {
         tail = q;
     }
 
-//    public Node searchByName(String xName) {
-//        Node p = head;
-//        while (p != null) {
-//            if (p.getInfo().getName().equals(xName)) {
-//                return (p);
-//            }
-//            p = p.getNext();
-//        }
-//        return (null);
-//    }
-
-    public Node searchById(int xId) {
+    public Node searchById(String xId) {
         Node p = head;
         while (p != null) {
-            if (p.getInfo().getId() == xId) {
+            if (p.getInfo().getId().equals(xId)) {
+                return (p);
+            }
+            p = p.getNext();
+        }
+        return (null);
+    }
+    
+    public Node searchByFirstAndLastName(String xFirstName, String xLastName) {
+        Node p = head;
+        while (p != null) {
+            if (p.getInfo().getFirstName().equals(xFirstName) && p.getInfo().getLastName().equals(xLastName)) {
                 return (p);
             }
             p = p.getNext();
@@ -71,20 +68,20 @@ public class EmployeeManagerment {
         return (null);
     }
 
-//    public void sortByName() {
-//        Node pi, pj;
-//        Employee x;
-//
-//        for (pi = head; pi != null; pi = pi.getNext()) {
-//            for (pj = pi.getNext(); pj != null; pj = pj.getNext()) {
-//                if (pj.getInfo().getName().compareTo(pi.getInfo().getName()) < 0) {
-//                    x = pi.getInfo();
-//                    pi.setInfo(pj.getInfo());
-//                    pj.setInfo(x);
-//                }
-//            }
-//        }
-//    }
+    public void sortBySalary() {
+        Node pi, pj;
+        Employee x;
+
+        for (pi = head; pi != null; pi = pi.getNext()) {
+            for (pj = pi.getNext(); pj != null; pj = pj.getNext()) {
+                if (pj.getInfo().getSalary() < pi.getInfo().getSalary()) {
+                    x = pi.getInfo();
+                    pi.setInfo(pj.getInfo());
+                    pj.setInfo(x);
+                }
+            }
+        }
+    }
 
     private void deleteFirst() {
         if (head == null) {
@@ -141,6 +138,137 @@ public class EmployeeManagerment {
             p = p.getNext();
         }
         System.out.println();
+    }
+
+    //Check Duplicate    
+    private Boolean checkDuplicateId(String xId) {
+        Node p = head;
+        while (p != null) {
+            if (p.getInfo().getId().equals(xId)) {
+                return false;
+            }
+            p = p.getNext();
+        }
+        return true;
+    }
+
+    private Boolean checkDuplicateFirstName(String xFirstName) {
+        Node p = head;
+        while (p != null) {
+            if (p.getInfo().getFirstName().equals(xFirstName)) {
+                return false;
+            }
+            p = p.getNext();
+        }
+        return true;
+    }
+
+    private Boolean checkDuplicateLastName(String xLastName) {
+        Node p = head;
+        while (p != null) {
+            if (p.getInfo().getLastName().equals(xLastName)) {
+                return false;
+            }
+            p = p.getNext();
+        }
+        return true;
+    }
+
+    private Boolean checkDuplicatePhone(String xPhone) {
+        Node p = head;
+        while (p != null) {
+            if (p.getInfo().getPhone().equals(xPhone)) {
+                return false;
+            }
+            p = p.getNext();
+        }
+        return true;
+    }
+
+    private Boolean checkDuplicateEmail(String xEmail) {
+        Node p = head;
+        while (p != null) {
+            if (p.getInfo().getEmail().equals(xEmail)) {
+                return false;
+            }
+            p = p.getNext();
+        }
+        return true;
+    }
+
+    private Boolean checkDuplicateAddress(String xAddress) {
+        Node p = head;
+        while (p != null) {
+            if (p.getInfo().getAddress().equals(xAddress)) {
+                return false;
+            }
+            p = p.getNext();
+        }
+        return true;
+    }
+
+    private Boolean checkDuplicateDate(String xDate) {
+        Node p = head;
+        while (p != null) {
+            if (p.getInfo().getDateOfBirth().equals(xDate)) {
+                return false;
+            }
+            p = p.getNext();
+        }
+        return true;
+    }
+
+    private Boolean checkDuplicateSex(String xSex) {
+        Node p = head;
+        while (p != null) {
+            if (p.getInfo().getSex().equals(xSex)) {
+                return false;
+            }
+            p = p.getNext();
+        }
+        return true;
+    }
+
+    private Boolean checkDuplicateSalary(int xSalary) {
+        Node p = head;
+        while (p != null) {
+            if (p.getInfo().getSalary() == xSalary) {
+                return false;
+            }
+            p = p.getNext();
+        }
+        return true;
+    }
+
+    private Boolean checkDuplicateAgency(String xAgency) {
+        Node p = head;
+        while (p != null) {
+            if (p.getInfo().getAgency().equals(xAgency)) {
+                return false;
+            }
+            p = p.getNext();
+        }
+        return true;
+    }
+
+    /**
+     * ID trùng -> FirstName, LastName k trùng -> k add -> FirstName, LastName
+     * trùng -> DOB, Sex k trùng -> k add -> DOB, Sex trùng -> add ID ko trùng
+     * -> tùy ý
+     *
+     * trùng = false k trùng = true
+*
+     */
+    
+    public Boolean check(String xId, String xFirstName, String xLastName, String xDateOfBirth, String xSex) {
+        if (!checkDuplicateId(xId)) {
+            if (checkDuplicateFirstName(xFirstName) && checkDuplicateLastName(xLastName) && checkDuplicateDate(xDateOfBirth) && checkDuplicateSex(xSex)) {
+                return true; //ok
+            } else {
+                return false; // not
+            }
+        }
+        return true;
     }
 
 }

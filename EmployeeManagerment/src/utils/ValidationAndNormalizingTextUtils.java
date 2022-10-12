@@ -8,6 +8,7 @@ package utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -123,26 +124,51 @@ public class ValidationAndNormalizingTextUtils {
             }
         }
     }
-    
-    public static Date GetDate(String mess){
-        Date date = new Date();
-        SimpleDateFormat fm = new SimpleDateFormat("dd/MM/yyyy");
-        fm.setLenient(false);
-        Scanner sc = new Scanner(System.in);
-        do{
-            System.out.println(mess);
-            String sDate = sc.nextLine();
-            try {
-                date = fm.parse(sDate);
-                return date;
-            } catch (ParseException ex) {
-                System.out.print(ex);
+
+    private static boolean checkContainCharacter(String input) {
+        boolean isContain = false;
+
+        for (int i = 0; i < input.length(); i++) {
+            if (!(input.charAt(i) >= '/' && input.charAt(i) <= '9')) {
+                isContain = true;
             }
-        }while(true);
-        
+        }
+        return isContain;
     }
-    public static String DayOfWeek(Date d){
-        SimpleDateFormat SDF =  new SimpleDateFormat("EEEE");
+
+    public static Date getDate(String mess) {
+        Scanner sc = new Scanner(System.in);
+        String input;
+        Date date;
+        do {
+            System.out.print(mess);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            dateFormat.setLenient(false);
+            input = sc.nextLine();
+            if (input.isEmpty()) {
+                System.err.println("Input could not be empty!!!");
+                continue;
+            } else if (!checkContainCharacter(input)) {
+                if (!input.matches("\\d{2}[/]\\d{2}[/]\\d{4}")) {
+                    System.err.println("Input is wrong format date");
+                    continue;
+                }
+                try {
+                    date = dateFormat.parse(input);
+                    break;
+                } catch (ParseException ex) {
+                    System.err.println("Date doesn't existed!!");
+                }
+            } else {
+                System.err.println("Contain special character. Please enter again!");
+            }
+        } while (true);
+        return date;
+    }
+
+    public static String DayOfWeek(Date d) {
+        SimpleDateFormat SDF = new SimpleDateFormat("EEEE");
         return SDF.format(d);
     }
+
 }
