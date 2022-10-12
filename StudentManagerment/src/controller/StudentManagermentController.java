@@ -99,10 +99,16 @@ public class StudentManagermentController {
             switch (choice) {
                 case ("U"):
                     Student x = new Student();
+                    studentInputer = new StudentInputer();
                     studentInputer.setInformation(x);
                     while (!studentManagerment.check(x.getId(), x.getName(), x.getSemeter(), x.getCourseName())) {
                         System.out.println("Cannot update! Check the list later to see if some elements have been exist.");
-                        studentInputer.setInformation(x);
+                        boolean choic = ValidationAndNormalizingTextUtils.pressYNtoContinue("Try again? (Y/N): ");
+                        if (choic) {
+                            studentInputer.setInformation(x);
+                        } else {
+                            return;
+                        }
                     }
                     s.setInfo(x);
                     System.out.println("Updated!");
