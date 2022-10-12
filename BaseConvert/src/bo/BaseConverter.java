@@ -5,7 +5,7 @@ import utils.ValidationAndNormalizingTextUtils;
 
 public class BaseConverter {
 
-    private static String bitString = "0123456789ABCDEF";
+    private static String BIT_STRING = "0123456789ABCDEF";
 
     public BaseConverter() {
     }
@@ -18,7 +18,7 @@ public class BaseConverter {
             int number = Integer.parseInt(ValidationAndNormalizingTextUtils.removeAllBlank(input));
             while (number != 0) {
                 int remainder = number % type.getBaseToInt();
-                ret = bitString.charAt(remainder) + ret;
+                ret = BIT_STRING.charAt(remainder) + ret;
                 number /= type.getBaseToInt();
             }
         }
@@ -29,7 +29,7 @@ public class BaseConverter {
         int ret = 0;
         String str = input.toUpperCase();
         for (int i = 0; i < input.length(); i++) {
-            ret += bitString.indexOf(str.charAt(i)) * Math.pow(type.getBaseToInt(), str.length() - 1 - i);
+            ret += BIT_STRING.indexOf(str.charAt(i)) * Math.pow(type.getBaseToInt(), str.length() - 1 - i);
         }
         return ret + "";
     }
@@ -56,19 +56,6 @@ public class BaseConverter {
 
     private String binToHex(String input) {
         return decToHex(binToDec(input));
-    }
-
-    private BaseType getConvertBaseByChoice(int choice) {
-        switch (choice) {
-            case 1:
-                return BaseType.Binary;
-            case 2:
-                return BaseType.Decimal;
-            case 3:
-                return BaseType.Hexadecimal;
-            default:
-                throw new AssertionError();
-        }
     }
 
     public String convertNumberByChoice(String numString, BaseType inputBase, BaseType convertBase) {
