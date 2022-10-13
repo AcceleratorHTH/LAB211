@@ -4,6 +4,7 @@ import model.BaseType;
 import utils.ValidationAndNormalizingTextUtils;
 
 public class ValueInput {
+
     public ValueInput() {
     }
 
@@ -25,6 +26,7 @@ public class ValueInput {
         String ret = ValidationAndNormalizingTextUtils.getStringByRegex("Enter your " + type + " value: ", "Please enter " + type + " value", regex).toUpperCase();
         return ret;
     }
+
     public BaseType getBaseByChoice(String mess, BaseType originalBase) {
         BaseType base = null;
         do {
