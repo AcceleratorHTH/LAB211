@@ -7,6 +7,7 @@ package bo;
 
 import model.BaseType;
 import utils.ValidationAndNormalizingTextUtils;
+
 /**
  *
  * @author admin

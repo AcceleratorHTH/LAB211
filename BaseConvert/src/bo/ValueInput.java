@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package bo;
+
 /**
  *
  * @author admin

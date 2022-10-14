@@ -4,13 +4,15 @@
  * and open the template in the editor.
  */
 package model;
+
 /**
  *
  * @author admin
  */
 public enum BaseType {
     Binary, Decimal, Hexadecimal;
-    public  int getBaseToInt(){
+
+    public int getBaseToInt() {
         switch (this) {
             case Binary:
                 return 2;
