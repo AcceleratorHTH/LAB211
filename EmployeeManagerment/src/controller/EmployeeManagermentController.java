@@ -37,12 +37,6 @@ public class EmployeeManagermentController {
         }
     }
 
-    public void addFast() {
-        employeeManagerment.addLast(new Employee("HE171493", "Trung", "Pham", "0832270603", "Detectivetrunghth@gmail.com", "Viet Nam", "27/06/2003", "Male", 10000000, "Student"));
-        employeeManagerment.addLast(new Employee("HE171228", "Nhi", "Yen", "0911111111", "nhinhyhe171228@gmail.com", "Viet Nam", "09/08/2003", "Female", 1000000, "Student"));
-
-    }
-
     public void updateEmployee() {
         if (employeeManagerment.isEmpty()) {
             System.err.println("List empty!");

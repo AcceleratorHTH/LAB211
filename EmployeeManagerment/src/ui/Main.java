@@ -21,7 +21,6 @@ public class Main {
             choice = ValidationAndNormalizingTextUtils.getInt("Your choice: ", "Please input an integer number!", "Please input an integer number in range [1,5]", 1, 5);
             switch (choice) {
                 case 1:
-//                    employeeManagermentController.addFast();
                     employeeManagermentController.addEmployee();
                     break;
                 case 2:

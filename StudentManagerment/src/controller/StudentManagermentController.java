@@ -121,19 +121,6 @@ public class StudentManagermentController {
         }
     }
 
-    public void addFast() {
-
-        studentManagerment.addLast(new Student("HE171493", "Pham Quoc Trung", "Summer 2022", "Java"));
-        studentManagerment.addLast(new Student("HE171234", "Pham Thi Minh Thuy", "Fall 2022", "Java"));
-        studentManagerment.addLast(new Student("HE175678", "Bui Tien Anh", "Spring 2022", "Java"));
-        studentManagerment.addLast(new Student("HE170910", "Tran Trong Duc", "Spring 2022", ".Net"));
-        studentManagerment.addLast(new Student("HE171493", "Pham Quoc Trung", "Fall 2022", "Java"));
-        studentManagerment.addLast(new Student("HE171493", "Pham Quoc Trung", "Fall 2022", "C/C++"));
-
-        studentManagerment.display();
-
-    }
-
     public void report() {
         if (studentManagerment.isEmpty()) {
             System.err.println("List empty!");

@@ -251,14 +251,7 @@ public class EmployeeManagerment {
         return true;
     }
 
-    /**
-     * ID trùng -> FirstName, LastName k trùng -> k add -> FirstName, LastName
-     * trùng -> DOB, Sex k trùng -> k add -> DOB, Sex trùng -> add ID ko trùng
-     * -> tùy ý
-     *
-     * trùng = false k trùng = true
-*
-     */
+
     
     public Boolean check(String xId, String xFirstName, String xLastName, String xDateOfBirth, String xSex) {
         if (!checkDuplicateId(xId)) {
@@ -270,5 +263,15 @@ public class EmployeeManagerment {
         }
         return true;
     }
+    
+        /**
+     * ID trùng -> FirstName, LastName k trùng -> k add -> FirstName, LastName
+     * trùng -> DOB, Sex k trùng -> k add -> DOB, Sex trùng -> add ID ko trùng
+     * -> tùy ý
+     *
+     * trùng = false k trùng = true
+*
+     * 
+     */
 
 }
